@@ -19,6 +19,8 @@ df1.drop('지번주소', axis = 1 ,inplace=True)
 
 gu_count = df1['자치구'].value_counts()
 
+
+st.header('프로젝트 제목')
 # ==========================세션 설정============================
 
 if 'gu' not in st.session_state:
@@ -26,8 +28,6 @@ if 'gu' not in st.session_state:
 
 
 # ==========================사이드바 제작============================
-st.header('자치구별 무더위쉼터 개수')
-
 with st.sidebar.form(key = 'form1', clear_on_submit = True):
     st.subheader('자치구 선택')
     gu = st.selectbox('자치구',gu_count.index)
@@ -35,9 +35,11 @@ with st.sidebar.form(key = 'form1', clear_on_submit = True):
     if st.form_submit_button('submit'):
         st.session_state['gu'] = gu
         st.rerun()
-# ==================자치구별 정보 출력====================
+# ==================컬럼 제작====================
+tab1, tab2, tab3 = st.tabs(['가설 1','가설2','가설3'])
 
-st.write(gu)
+with tab1:
+    st.header('가설 1. 자치구별로 무더위쉼터 개수가 비등비등할 것이다.')
 # ===========================지도에 표시=====================
 # 서울 자치구 GeoJSON 파일 읽기
 geo_path = "https://raw.githubusercontent.com/southkorea/seoul-maps/master/kostat/2013/json/seoul_municipalities_geo_simple.json"  # GeoJSON 파일 경로
@@ -76,4 +78,10 @@ for _, row in geo_data.iterrows(): # geo_data 순회하면서 각 행(row)을 �
                           max_width=300)  # Popup 추가
     ).add_to(seoul_map)
     
-sf.st_folium(seoul_map, width = 1000, height=1000)
+sf.st_folium(seoul_map, width = 500, height=500)
+
+with tab2:
+    st.header('가설 2. 자치구별 65세 이상 인구 수과 무더위쉼터 개수')
+
+with tab3:
+    st.header('가설 3. 어쩌구저쩌구')
