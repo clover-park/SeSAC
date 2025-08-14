@@ -1,0 +1,101 @@
+	타이틀	아티스트
+0	비의 랩소디	임재현
+1	To. X	태연 (TAEYEON)
+2	Perfect Night	LE SSERAFIM (르세라핌)
+3	Drama	aespa
+4	에피소드	이무진
+5	사랑은 늘 도망가	임영웅
+6	헤어지자 말해요	박재정
+7	그대만 있다면 (여름날 우리 X 너드커넥션 (Nerd Connection))	너드커넥션 (Nerd Connection)
+8	인사	범진
+9	Love 119	RIIZE
+10	Seven (feat. Latto) - Clean Ver.	정국
+11	Baddie	IVE (아이브)
+12	우리들의 블루스	임영웅
+13	모래 알갱이	임영웅
+14	Do or Die	임영웅
+15	다시 만날 수 있을까	임영웅
+16	첫 눈	EXO
+17	I AM	IVE (아이브)
+18	Love Lee	AKMU (악뮤)
+19	이제 나만 믿어요	임영웅
+20	Get A Guitar	RIIZE
+21	무지개	임영웅
+22	You & Me	제니 (JENNIE)
+23	London Boy	임영웅
+24	아버지	임영웅
+25	Polaroid	임영웅
+26	Standing Next to You	정국
+27	인생찬가	임영웅
+28	너의 모든 순간	성시경
+29	후라이의 꿈	AKMU (악뮤)
+30	A bientot	임영웅
+31	Super Shy	NewJeans
+32	사막에서 꽃을 피우듯	우디 (Woody)
+33	Ditto	NewJeans
+34	잘 지내자, 우리 (여름날 우리 X 로이킴)	로이킴
+35	ETA	NewJeans
+36	Hype Boy	NewJeans
+37	연애편지	임영웅
+38	퀸카 (Queencard)	(여자)아이들
+39	어떻게 이별까지 사랑하겠어, 널 사랑하는 거지	AKMU (악뮤)
+40	MANIAC	VIVIZ (비비지)
+41	별 떨어진다 (I Do)	디오 (D.O.)
+42	사랑인가 봐	멜로망스
+43	Discord	QWER
+44	Dynamite	방탄소년단
+45	봄날	방탄소년단
+46	Spicy	aespa
+47	사건의 지평선	윤하 (YOUNHA)
+48	사랑할 수밖에	볼빨간사춘기
+49	사랑하지 않아서 그랬어	임한별
+50	Smoke (Prod. Dynamicduo, Padi)	다이나믹 듀오, 이영지
+51	그대가 내 안에 박혔다(그내박)	순순희(기태)
+52	Either Way	IVE (아이브)
+53	음악의 신	세븐틴 (SEVENTEEN)
+54	Kitsch	IVE (아이브)
+55	Fast Forward	전소미
+56	취중고백	김민석
+57	Off The Record	IVE (아이브)
+58	OMG	NewJeans
+59	LOVE DIVE	IVE (아이브)
+60	심(心)	DK(디셈버)
+61	I Don't Think That I Like Her	Charlie Puth
+62	이브, 프시케 그리고 푸른 수염의 아내	LE SSERAFIM (르세라핌)
+63	I Love You	안세하
+64	잠시라도 우리	성시경, 나얼
+65	파이팅 해야지 (Feat. 이영지)	부석순 (SEVENTEEN)
+66	Steal The Show (From “엘리멘탈”)	Lauv
+67	모든 날, 모든 순간 (Every day, Every Moment)	폴킴
+68	예뻤어	DAY6 (데이식스)
+69	Butter	방탄소년단
+70	주저하는 연인들을 위해	잔나비
+71	물론	허각
+72	After LIKE	IVE (아이브)
+73	손오공	세븐틴 (SEVENTEEN)
+74	해요 (2022)	#안녕
+75	사랑..그게 뭔데	지아
+76	Bubble	STAYC(스테이씨)
+77	다정히 내 이름을 부르면	경서예지, 전건호
+78	Merry PLLIstmas	PLAVE
+79	눈이 오잖아(Feat.헤이즈)	이무진
+80	그중에 그대를 만나	김호중
+81	Dangerously	Charlie Puth
+82	그대가 있는 곳, 언제 어디든	로이킴
+83	Attention	NewJeans
+84	Chill Kill	Red Velvet (레드벨벳)
+85	한 페이지가 될 수 있게	DAY6 (데이식스)
+86	나에게 그대만이	탑현
+87	기억해줘요 내 모든 날과 그때를	화곡동 청개구리
+88	UNFORGIVEN (feat. Nile Rodgers)	LE SSERAFIM (르세라핌)
+89	여섯 번째 여름	PLAVE
+90	GODS	NewJeans, League of Legends
+91	I Love My Body	화사 (HWASA)
+92	건물 사이에 피어난 장미 (Rose Blossom)	H1-KEY (하이키)
+93	Closer Than This	지민
+94	Yes or No	정국
+95	화이트 (White)	폴킴
+96	Dear. PLLI	PLAVE
+97	3D (feat. Jack Harlow)	정국, Jack Harlow
+98	기다릴게	PLAVE
+99	Snowman	Sia

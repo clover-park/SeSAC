@@ -22,19 +22,83 @@ df1.drop('지번주소', axis = 1 ,inplace=True)
 gu_count = df1['자치구'].value_counts()
 gu_count = gu_count.sort_values()
 
-st.header('프로젝트 제목')
-# ==========================세션 설정============================
-
-if 'gu' not in st.session_state:
-    st.session_state['gu'] = ''
+st.header('데이터로 본 서울시 무더위쉼터 현실📊')
 
 # ====================================탭 제작===============================
-tab1, tab2, tab3,tab4, tab5 = st.tabs(['가설 1','가설2','가설3','가설4','가설5'])
 
+tab1, tab2,tab3, tab4 = st.tabs(['가설2','가설3','가설4','수치화2'])
+    
+# =================================가설2(파이차트 2개)========================
 with tab1:
     col1, col2 = st.columns(2)
     with col1:
-        st.subheader('자치구별로 무더위쉼터 개수가 비등비등할 것이다.', divider = 'orange')
+        st.subheader('무더위쉼터 유형 분류', divider = 'orange')
+        
+        category = df1.iloc[:, 2]
+        counts = category.value_counts()
+        fig, ax = plt.subplots(figsize=(8, 8))
+        ax.pie(counts, labels=counts.index, autopct='%1.1f%%')
+        ax.set_title('무더위 쉼터 종류')
+        st.pyplot(fig)
+        
+    with col2:
+        st.subheader('무더위쉼터 세부 유형', divider = 'orange')
+        silver_hall = []
+        center = []
+        bank = []
+        library = []
+        church = []
+        sarangbang = []
+        welfare = []
+        green_smart = []
+        
+        shelter_type = []
+        
+        for i in df1['쉼터명칭']:
+            if '경로당' in i:
+                silver_hall.append(i)
+            elif '주민센터' in i:
+                center.append(i)
+            elif '은행' in i or '금고' in i:
+                bank.append(i)
+            elif '도서관' in i:
+                library.append(i)
+            elif '교회' in i:
+                church.append(i)
+            elif '사랑방' in i:
+                sarangbang.append(i)
+            elif '복지' in i:
+                welfare.append(i)
+            elif '그린스마트' in i:
+                green_smart.append(i)
+                
+        
+        shelter_num = len(df1['쉼터명칭'])
+        
+        shelter_type.append(len(silver_hall)/shelter_num *100)
+        shelter_type.append(len(center)/shelter_num *100)
+        shelter_type.append(len(bank)/shelter_num *100)
+        shelter_type.append(len(library)/shelter_num *100)
+        shelter_type.append(len(church)/shelter_num *100)
+        shelter_type.append(len(sarangbang)/shelter_num *100)
+        shelter_type.append(len(welfare)/shelter_num *100)
+        shelter_type.append(len(green_smart)/shelter_num *100)
+        
+        df3 = pd.DataFrame(shelter_type)
+        df3.index = ['경로당','주민센터','은행','도서관','교회','사랑방','복지관','그린스마트 쉼터']
+        fig, ax = plt.subplots(figsize=(7,7))
+        ax.pie(shelter_type,
+                labels = df3.index,
+                autopct='%1.1f%%')
+        
+        ax.set_title('무더위 쉼터 종류')
+        st.pyplot(fig)
+    
+# =================================가설3(바 차트, 지도)========================
+with tab2:
+    col1, col2 = st.columns(2)
+    with col1:
+        st.subheader('자치구별 무더위쉼터 수', divider = 'orange')
         plt.figure(figsize=(10,10))
         plt.bar(gu_count.index, gu_count)
         plt.ylim(0,300)
@@ -45,7 +109,7 @@ with tab1:
     with col2:
 # ===========================지도에 표시===============================
 # 서울 자치구 GeoJSON 파일 읽기
-        st.subheader('자치구별로 무더위쉼터 개수 지도', divider = 'orange')
+        st.subheader('자치구별 무더위쉼터 수 지도', divider = 'orange')
         geo_path = "https://raw.githubusercontent.com/southkorea/seoul-maps/master/kostat/2013/json/seoul_municipalities_geo_simple.json"  # GeoJSON 파일 경로
         geo_data = gpd.read_file(geo_path)
         gu_count_df = df1['자치구'].value_counts().reset_index()
@@ -83,9 +147,9 @@ with tab1:
             ).add_to(seoul_map)
             
         sf.st_folium(seoul_map, width = 300, height=300)
-
-with tab2:
-    st.subheader('고령자수가 많은 자치구일수록, 무더위 쉼터의 개수도 많을 것이다.', divider = 'orange')
+# ======================================가설4(이중차트)============================
+with tab3:
+    st.subheader('자치구별 고령자수와 무더위쉼터 수', divider = 'orange')
     df1 = pd.read_csv('data/서울시 무더위쉼터.csv')
     population = pd.read_csv('data/고령자현황_20250720105739.csv')
     gu = []
@@ -135,72 +199,16 @@ with tab2:
     ax2.tick_params(axis='y', labelcolor='blue')
     plt.tight_layout()
     st.pyplot(fig)
-with tab3:
-    st.subheader('무더위쉼터 종류가 다양한 만큼, 각 항목마다 고른 분포율을 보일 것이다.', divider = 'orange')
-    silver_hall = []
-    center = []
-    bank = []
-    library = []
-    church = []
-    sarangbang = []
-    welfare = []
-    green_smart = []
-    
-    shelter_type = []
-    
-    for i in df1['쉼터명칭']:
-        if '경로당' in i:
-            silver_hall.append(i)
-        elif '주민센터' in i:
-            center.append(i)
-        elif '은행' in i or '금고' in i:
-            bank.append(i)
-        elif '도서관' in i:
-            library.append(i)
-        elif '교회' in i:
-            church.append(i)
-        elif '사랑방' in i:
-            sarangbang.append(i)
-        elif '복지' in i:
-            welfare.append(i)
-        elif '그린스마트' in i:
-            green_smart.append(i)
-            
-    
-    shelter_num = len(df1['쉼터명칭'])
-    
-    shelter_type.append(len(silver_hall)/shelter_num *100)
-    shelter_type.append(len(center)/shelter_num *100)
-    shelter_type.append(len(bank)/shelter_num *100)
-    shelter_type.append(len(library)/shelter_num *100)
-    shelter_type.append(len(church)/shelter_num *100)
-    shelter_type.append(len(sarangbang)/shelter_num *100)
-    shelter_type.append(len(welfare)/shelter_num *100)
-    shelter_type.append(len(green_smart)/shelter_num *100)
-    
-    df3 = pd.DataFrame(shelter_type)
-    df3.index = ['경로당','주민센터','은행','도서관','교회','사랑방','복지관','그린스마트 쉼터']
-    fig, ax = plt.subplots(figsize=(7,7))
-    ax.pie(shelter_type,
-            labels = df3.index,
-            autopct='%1.1f%%')
-    
-    ax.set_title('무더위 쉼터 종류')
-    st.pyplot(fig)
-    
+# ================================수치화2=========================================
 with tab4:
-    st.subheader('각 자치구별 인구수 대비 무더위 쉼터 개수 비율로 시급성을 따져 볼 수 있을 것이다.', divider = 'orange')
-with tab5:
+    st.subheader('각 자치구별 인구수 대비 무더위 쉼터 개수 수치화2', divider = 'orange')
     with st.expander("위험 등급 기준 안내"):
         st.markdown("""
-        - **매우 위험**: 고령자 및 장애인 1,000명당 무더위쉼터 수가 서울 평균보다 현저히 낮은 지역입니다.
-        - **위험**: 인프라 부족이 우려되며, 개설 우선 검토가 필요한 수준입니다.
-        - **주의**: 인프라 밀도는 중간 수준이며 추가 점검이 권장됩니다.
+        - **위험**: 무더위쉼터 부족이 우려되며, 개설 우선 검토가 필요한 수준입니다.
+        - **주의**: 무더위쉼터 밀도는 중간 수준이며 추가 점검이 권장됩니다.
         - **보통**: 적절한 분포로 판단되지만 지역 내 균형 여부 확인 필요.
         - **양호**: 인구 대비 인프라 수준이 우수하며, 급박한 추가 개설 필요는 낮습니다.
         """)
-    st.subheader('시급성 지수', divider = 'orange')
-    gu = st.selectbox('',gu_count['자치구'])
 
     df_plot1 = df_plot1.sort_values('자치구')
     gu_count = gu_count.sort_values('자치구')
@@ -209,16 +217,11 @@ with tab5:
     priority_index.drop('무더위쉼터 개수', axis = 1, inplace = True)
     priority_index['시급성 지수'] = priority_index['시급성 지수'].round(1)
 
-    priority_index['code'] = pd.cut(
+    priority_index['위험 등급'] = pd.cut(
     priority_index['시급성 지수'],
-    bins=[0, 299.9, 499.9, np.inf],
-    labels=['양호', '주의', '위험']
+    bins=[299.9, 399.9, 499.9, 599.9, np.inf],
+    labels=['양호','보통', '주의', '위험']
     )
-
-    priority_index = gu_count.copy()
-    priority_index['시급성 지수'] = df_plot1['65세 이상 인구 수']/gu_count['무더위쉼터 개수']
-    priority_index.drop('무더위쉼터 개수', axis = 1, inplace = True)
-    priority_index['시급성 지수'] = priority_index['시급성 지수'].round(1)
 
     geo_path = "https://raw.githubusercontent.com/southkorea/seoul-maps/master/kostat/2013/json/seoul_municipalities_geo_simple.json"  # GeoJSON 파일 경로
     geo_data = gpd.read_file(geo_path)
@@ -252,8 +255,8 @@ with tab5:
         folium.GeoJson(
             row['geometry'],  # GeoJSON 형식의 geometry 데이터
             name=row['name'],
-            tooltip=folium.Tooltip(f"{row['name']}: {row['시급성 지수']}"),  # Tooltip에 표시되는 내용
+            tooltip=folium.Tooltip(f"{row['name']}: {row['위험 등급']}"),  # Tooltip에 표시되는 내용
             popup=folium.Popup(f"{row['name']}<br>시급성 지수: {row['시급성 지수']}", 
                               max_width=300)  # Popup 추가
         ).add_to(seoul_map)
-    sf.st_folium(seoul_map, width = 1000, height=1000)
+    sf.st_folium(seoul_map, width = 600, height=600)
